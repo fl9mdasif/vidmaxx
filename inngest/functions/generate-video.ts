@@ -8,8 +8,7 @@ import Plunk from "@plunk/node";
 import { generateVideoEmailTemplate } from "@/lib/email-templates";
 
 export const generateVideo = inngest.createFunction(
-    { id: "generate-video" },
-    { event: "video/generate.requested" },
+    { id: "generate-video", triggers: [{ event: "video/generate.requested" }] },
     async ({ event, step }) => {
         const { seriesId } = event.data;
 

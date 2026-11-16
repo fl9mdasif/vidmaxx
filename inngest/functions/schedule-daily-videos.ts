@@ -2,8 +2,7 @@ import { inngest } from "../client";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export const scheduleDailyVideos = inngest.createFunction(
-    { id: "schedule-daily-videos" },
-    { cron: "0 */4 * * *" }, // Run every 4 hours to check for upcoming videos
+    { id: "schedule-daily-videos", triggers: [{ cron: "0 */4 * * *" }] }, // Run every 4 hours to check for upcoming videos
     async ({ step }) => {
         const activeSeries = await step.run("fetch-active-series", async () => {
             const { data, error } = await supabaseAdmin
